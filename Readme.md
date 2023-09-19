@@ -3,16 +3,34 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E2254)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
+
+# WinForms Property Grid - Filter object properties (CustomPropertyDescriptors event)
+
+This example handles the Property Grid's [CustomPropertyDescriptors](https://docs.devexpress.com/WindowsForms/DevExpress.XtraVerticalGrid.PropertyGridControl.CustomPropertyDescriptors) event to display properties based on a condition.
+
+The example displays Dock, Size, and Location properties at the root. For the Size property, the example displays the `Height` property.
+
+```csharp
+void propertyGridControl1_CustomPropertyDescriptors(object sender, CustomPropertyDescriptorsEventArgs e) {
+    // Specifies properties to display at the root level.
+    if(e.Context.PropertyDescriptor == null) {
+        PropertyDescriptorCollection filteredCollection = new PropertyDescriptorCollection(null);
+        AddIfPropertyExist(e.Properties, filteredCollection, "Dock");
+        AddIfPropertyExist(e.Properties, filteredCollection, "Size");
+        AddIfPropertyExist(e.Properties, filteredCollection, "Location");
+        AddIfPropertyExist(e.Properties, filteredCollection, "NonexistentProperty");
+        e.Properties = filteredCollection;
+    }
+    // Specifies nested properties for the Size property.
+    if(e.Context.PropertyDescriptor != null && e.Context.PropertyDescriptor.Name == "Size") {
+        PropertyDescriptorCollection filteredCollection = new PropertyDescriptorCollection(null);
+        AddIfPropertyExist(e.Properties, filteredCollection, "Height");
+        e.Properties = filteredCollection;
+    }
+}
+```
+
+
+## Files to Review
 
 * [Form1.cs](./CS/Form1.cs) (VB: [Form1.vb](./VB/Form1.vb))
-<!-- default file list end -->
-# How to filter an object's properties using the CustomPropertyDescriptors event
-
-
-<p>This example shows how to display specific properties in a PropertyGridControl, while hiding other properties. Properties to be displayed are filtered via the CustomPropertyDescriptors event.</p><p>At the root level the Dock, Size and Location properties are displayed. For the Size property, only the Height nested property is displayed.</p>
-
-<br/>
-
-
