@@ -1,5 +1,10 @@
+Imports System
+Imports System.Collections.Generic
 Imports System.ComponentModel
+Imports System.Data
 Imports System.Drawing
+Imports System.Linq
+Imports System.Text
 Imports System.Windows.Forms
 Imports DevExpress.XtraVerticalGrid.Events
 
@@ -27,7 +32,7 @@ Namespace PropertyFiltering
             End If
 
             'Provide nested properties for the Size property
-            If e.Context.PropertyDescriptor IsNot Nothing AndAlso Equals(e.Context.PropertyDescriptor.Name, "Size") Then
+            If e.Context.PropertyDescriptor IsNot Nothing AndAlso e.Context.PropertyDescriptor.Name Is "Size" Then
                 Dim filteredCollection As PropertyDescriptorCollection = New PropertyDescriptorCollection(Nothing)
                 AddIfPropertyExist(e.Properties, filteredCollection, "Height")
                 e.Properties = filteredCollection

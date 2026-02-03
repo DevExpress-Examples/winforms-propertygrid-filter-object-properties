@@ -36,7 +36,7 @@ Namespace PropertyFiltering
             Me.propertyGridControl1.Name = "propertyGridControl1"
             Me.propertyGridControl1.Size = New System.Drawing.Size(620, 384)
             Me.propertyGridControl1.TabIndex = 0
-            AddHandler Me.propertyGridControl1.CustomPropertyDescriptors, New DevExpress.XtraVerticalGrid.Events.CustomPropertyDescriptorsEventHandler(AddressOf Me.propertyGridControl1_CustomPropertyDescriptors)
+            Me.propertyGridControl1.CustomPropertyDescriptors += New DevExpress.XtraVerticalGrid.Events.CustomPropertyDescriptorsEventHandler(AddressOf Me.propertyGridControl1_CustomPropertyDescriptors)
             ' 
             ' Form1
             ' 
